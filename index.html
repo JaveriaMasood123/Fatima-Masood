@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background:#f9fafb;
+      color:#333;
+      line-height:1.6;
+    }
+
+    /* Navbar */
+    header {
+      background: linear-gradient(90deg, #b79494, #000000);
+      padding: 15px 40px;
+      color:white;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1 {
+      font-size: 22px;
+      letter-spacing:1px;
+    }
+    nav a {
+      color:white;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:500;
+      transition:0.3s;
+    }
+    nav a:hover { text-decoration:underline; }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg,#000000,#410303);
+      color:white;
+      text-align:center;
+      padding:80px 20px;
+    }
+    .hero h2 {
+      font-size:40px;
+      margin-bottom:10px;
+    }
+    .hero p {
+      font-size:18px;
+      opacity:0.9;
+    }
+    .hero a {
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 24px;
+      background:white;
+      color:#262f3d;
+      font-weight:600;
+      border-radius:6px;
+      text-decoration:none;
+      transition:0.3s;
+    }
+    .hero a:hover { background:#f0f0f0; }
+
+    /* About Section */
+    .about {
+      max-width:900px;
+      margin:60px auto;
+      padding:0 20px;
+      text-align:center;
+    }
+    .about h3 {
+      font-size:26px;
+      color:#1f1f23;
+      margin-bottom:12px;
+    }
+    .about p {
+      color:#555;
+      font-size:16px;
+      margin-bottom:24px;
+    }
+    .highlights {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+    .box {
+      background:white;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+      transition:0.3s;
+    }
+    
+    .box h4 {
+      color:#3c3c3d;
+      margin-bottom:8px;
+    }
+    .box p { color:#444; font-size:14px; }
+
+    /* Footer */
+    footer {
+      text-align:center;
+      background:#f3f4f6;
+      padding:15px;
+      margin-top:50px;
+      font-size:14px;
+      color:#555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>My Website</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="form.html">Form</a>
+      <a href="table.html">Table</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Welcome to My Website</h2>
+    <p>Clean design, modern look, and a simple start to web development.</p>
+    <a href="form.html">Explore Now</a>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h3>About This Project</h3>
+    <p>This website is created to showcase basic HTML skills with a professional touch.  
+       It includes a home page, a form, and a student table with styled layouts.</p>
+
+    <div class="highlights">
+      <div class="box">
+        <h4>✨ Modern Layout</h4>
+        <p>A fresh, simple, and well-organized structure that is easy to follow.</p>
+      </div>
+      <div class="box">
+        <h4>🖊️ Interactive Form</h4>
+        <p>A simple form page designed for practice and user input collection.</p>
+      </div>
+      <div class="box">
+        <h4>📊 Styled Table</h4>
+        <p>A neat student table page showing data in a clean, colorful format.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 | Created by <strong>Your Name</strong></p>
+  </footer>
+
+</body>
+</html>
