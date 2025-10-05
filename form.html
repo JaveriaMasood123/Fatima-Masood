@@ -3,51 +3,523 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Form Page</title>
+  <title>Contact Form - رابط فارم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: system-ui, sans-serif; background:#f3f4f6; margin:0; padding:20px; }
-    .card { max-width:600px; margin:20px auto; background:white; padding:18px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
-    label { display:block; margin-top:12px; font-weight:600; }
-    input, textarea, select { width:100%; padding:8px; margin-top:6px; box-sizing:border-box; }
-    button { margin-top:14px; padding:10px 16px; font-weight:700; cursor:pointer; }
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --card: rgba(255, 255, 255, 0.95);
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      --radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: slideIn 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .header h2 {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      color: var(--text-light);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+      animation: fadeIn 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.3s; }
+    .form-group:nth-child(2) { animation-delay: 0.4s; }
+    .form-group:nth-child(3) { animation-delay: 0.5s; }
+    .form-group:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .input-container {
+      position: relative;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input:valid, textarea:valid, select:valid {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 18px;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    input:focus + .input-icon,
+    textarea:focus + .input-icon,
+    select:focus + .input-icon {
+      color: var(--primary);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      padding-left: 50px;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 20px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+      animation: slideInUp 0.5s ease-out;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: #065f46;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 25px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+      background: rgba(139, 92, 246, 0.1);
+      transform: translateX(-5px);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--text-light);
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .card {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 15px;
+      }
+      
+      .card {
+        padding: 30px 20px;
+      }
+      
+      .header h2 {
+        font-size: 28px;
+      }
+      
+      input, textarea, select {
+        padding: 14px 16px 14px 45px;
+        font-size: 15px;
+      }
+      
+      .input-icon {
+        font-size: 16px;
+        left: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h2 {
+        font-size: 24px;
+      }
+      
+      .card {
+        padding: 25px 15px;
+      }
+      
+      input, textarea, select {
+        padding: 12px 14px 12px 40px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Contact Form</h2>
-    <form id="contactForm">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" required />
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h2>📝 رابط فارم</h2>
+        <p>ہم سے رابطہ کریں - ہم آپ کی سنتے ہیں</p>
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required />
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">نام</label>
+          <div class="input-container">
+            <input id="name" name="name" type="text" required placeholder="اپنا نام درج کریں" />
+            <i class="input-icon fas fa-user"></i>
+          </div>
+        </div>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="4"></textarea>
+        <div class="form-group">
+          <label for="email">ای میل</label>
+          <div class="input-container">
+            <input id="email" name="email" type="email" required placeholder="example@email.com" />
+            <i class="input-icon fas fa-envelope"></i>
+          </div>
+        </div>
 
-      <label for="gender">Gender</label>
-      <select id="gender" name="gender">
-        <option value="">Select</option>
-        <option>Female</option>
-        <option>Male</option>
-        <option>Other</option>
-      </select>
+        <div class="form-group">
+          <label for="message">پیغام</label>
+          <div class="input-container">
+            <textarea id="message" name="message" rows="4" placeholder="اپنا پیغام یہاں لکھیں..."></textarea>
+            <i class="input-icon fas fa-comment"></i>
+          </div>
+        </div>
 
-      <button type="submit">Submit</button>
-    </form>
+        <div class="form-group">
+          <label for="gender">جنس</label>
+          <div class="input-container">
+            <select id="gender" name="gender" required>
+              <option value="">منتخب کریں</option>
+              <option value="female">خاتون</option>
+              <option value="male">مرد</option>
+              <option value="other">دیگر</option>
+            </select>
+            <i class="input-icon fas fa-venus-mars"></i>
+          </div>
+        </div>
 
-    <p id="result" style="margin-top:12px;color:green;display:none;"></p>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span>فارم جمع کروائیں</span>
+        </button>
+      </form>
 
-    <p style="margin-top:10px;"><a href="index.html">← Back to Home</a></p>
+      <div class="result" id="result"></div>
+
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        ہوم پیج پر واپس جائیں
+      </a>
+
+      <div class="footer">
+        <p>ہم 24 گھنٹے آپ کی خدمت میں حاضر ہیں</p>
+      </div>
+    </div>
   </div>
 
   <script>
     document.getElementById('contactForm').addEventListener('submit', function(e){
       e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const resultDiv = document.getElementById('result');
       const name = document.getElementById('name').value;
-      document.getElementById('result').textContent = "Shukriya, " + (name || "guest") + "! Aapka form submit ho gaya.";
-      document.getElementById('result').style.display = 'block';
-      // Note: Yeh sirf front-end hai; agar aap want karain to data localStorage mein rakh saktay ho
+      
+      // Show loading state
+      submitBtn.innerHTML = '<span class="loading"></span> جمع کر رہے ہیں...';
+      submitBtn.disabled = true;
+      
+      // Simulate form processing
+      setTimeout(() => {
+        const messages = [
+          `شکریہ، ${name || 'مہمان'}! آپ کا فارم کامیابی سے جمع ہو گیا ہے۔`,
+          `آپ کا بہت بہت شکریہ ${name || 'مہمان'}! ہم جلد ہی آپ سے رابطہ کریں گے۔`,
+          `فارم جمع ہو گیا ${name || 'مہمان'}! ہم آپ کے پیغام پر غور کریں گے۔`
+        ];
+        
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        resultDiv.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <i class="fas fa-check-circle" style="font-size: 24px; color: #10b981;"></i>
+            <span>${randomMessage}</span>
+          </div>
+        `;
+        resultDiv.style.display = 'block';
+        
+        // Reset button
+        submitBtn.innerHTML = '<span>فارم جمع کروائیں</span>';
+        submitBtn.disabled = false;
+        
+        // Add celebration effect
+        resultDiv.style.animation = 'none';
+        setTimeout(() => {
+          resultDiv.style.animation = 'slideInUp 0.5s ease-out';
+        }, 10);
+        
+        // Optional: Reset form after success
+        // this.reset();
+        
+      }, 1500);
+    });
+
+    // Add input validation animations
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+      input.addEventListener('invalid', function() {
+        this.style.borderColor = 'var(--error)';
+        this.style.animation = 'shake 0.5s ease-in-out';
+      });
+      
+      input.addEventListener('input', function() {
+        if (this.checkValidity()) {
+          this.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+        }
+      });
+    });
+
+    // Add shake animation for invalid fields
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Add character counter for textarea
+    const textarea = document.getElementById('message');
+    const charCount = document.createElement('div');
+    charCount.style.cssText = 'text-align: right; font-size: 12px; color: var(--text-light); margin-top: 5px;';
+    textarea.parentNode.appendChild(charCount);
+
+    textarea.addEventListener('input', function() {
+      const count = this.value.length;
+      charCount.textContent = `${count} حروف`;
+      
+      if (count > 200) {
+        charCount.style.color = 'var(--warning)';
+      } else if (count > 100) {
+        charCount.style.color = 'var(--secondary)';
+      } else {
+        charCount.style.color = 'var(--text-light)';
+      }
     });
   </script>
 </body>
