@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Form - رابط فارم</title>
+  <title>Contact Form</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -371,21 +371,21 @@
   <div class="container">
     <div class="card">
       <div class="header">
-        <h2>📝 رابط فارم</h2>
-        <p>ہم سے رابطہ کریں - ہم آپ کی سنتے ہیں</p>
+        <h2>📝 Contact Form</h2>
+        <p>Get in touch with us - We're here to listen</p>
       </div>
 
       <form id="contactForm">
         <div class="form-group">
-          <label for="name">نام</label>
+          <label for="name">Full Name</label>
           <div class="input-container">
-            <input id="name" name="name" type="text" required placeholder="اپنا نام درج کریں" />
+            <input id="name" name="name" type="text" required placeholder="Enter your full name" />
             <i class="input-icon fas fa-user"></i>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="email">ای میل</label>
+          <label for="email">Email Address</label>
           <div class="input-container">
             <input id="email" name="email" type="email" required placeholder="example@email.com" />
             <i class="input-icon fas fa-envelope"></i>
@@ -393,28 +393,28 @@
         </div>
 
         <div class="form-group">
-          <label for="message">پیغام</label>
+          <label for="message">Message</label>
           <div class="input-container">
-            <textarea id="message" name="message" rows="4" placeholder="اپنا پیغام یہاں لکھیں..."></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Type your message here..."></textarea>
             <i class="input-icon fas fa-comment"></i>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="gender">جنس</label>
+          <label for="gender">Gender</label>
           <div class="input-container">
             <select id="gender" name="gender" required>
-              <option value="">منتخب کریں</option>
-              <option value="female">خاتون</option>
-              <option value="male">مرد</option>
-              <option value="other">دیگر</option>
+              <option value="">Select Gender</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="other">Other</option>
             </select>
             <i class="input-icon fas fa-venus-mars"></i>
           </div>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">
-          <span>فارم جمع کروائیں</span>
+          <span>Submit Form</span>
         </button>
       </form>
 
@@ -422,11 +422,11 @@
 
       <a href="index.html" class="back-link">
         <i class="fas fa-arrow-left"></i>
-        ہوم پیج پر واپس جائیں
+        Back to Homepage
       </a>
 
       <div class="footer">
-        <p>ہم 24 گھنٹے آپ کی خدمت میں حاضر ہیں</p>
+        <p>We're available 24/7 to assist you</p>
       </div>
     </div>
   </div>
@@ -440,15 +440,15 @@
       const name = document.getElementById('name').value;
       
       // Show loading state
-      submitBtn.innerHTML = '<span class="loading"></span> جمع کر رہے ہیں...';
+      submitBtn.innerHTML = '<span class="loading"></span> Submitting...';
       submitBtn.disabled = true;
       
       // Simulate form processing
       setTimeout(() => {
         const messages = [
-          `شکریہ، ${name || 'مہمان'}! آپ کا فارم کامیابی سے جمع ہو گیا ہے۔`,
-          `آپ کا بہت بہت شکریہ ${name || 'مہمان'}! ہم جلد ہی آپ سے رابطہ کریں گے۔`,
-          `فارم جمع ہو گیا ${name || 'مہمان'}! ہم آپ کے پیغام پر غور کریں گے۔`
+          `Thank you, ${name || 'Guest'}! Your form has been submitted successfully.`,
+          `We appreciate your message, ${name || 'Guest'}! We'll get back to you soon.`,
+          `Form submitted successfully, ${name || 'Guest'}! We'll review your message carefully.`
         ];
         
         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -462,7 +462,7 @@
         resultDiv.style.display = 'block';
         
         // Reset button
-        submitBtn.innerHTML = '<span>فارم جمع کروائیں</span>';
+        submitBtn.innerHTML = '<span>Submit Form</span>';
         submitBtn.disabled = false;
         
         // Add celebration effect
@@ -511,7 +511,7 @@
 
     textarea.addEventListener('input', function() {
       const count = this.value.length;
-      charCount.textContent = `${count} حروف`;
+      charCount.textContent = `${count} characters`;
       
       if (count > 200) {
         charCount.style.color = 'var(--warning)';
